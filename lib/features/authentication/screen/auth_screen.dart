@@ -1,6 +1,8 @@
-import 'package:dam_project/common/widgets/button.dart';
-import 'package:dam_project/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
+import 'package:dam_project/common/widgets/button.dart';
+import 'package:dam_project/features/authentication/screen/login_screen.dart';
+import 'package:dam_project/features/authentication/screen/signup_screen.dart';
+import 'package:dam_project/utils/constants/app_colors.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -38,8 +40,28 @@ class AuthScreen extends StatelessWidget {
                 ),
 
                 // Buttons
-                Button(label: "LOGIN", press: () {}),
-                Button(label: "SIGN UP", press: () {}),
+                Button(
+                  label: "LOGIN",
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                    );
+                  },
+                ),
+                Button(
+                  label: "SIGN UP",
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SignupScreen(),
+                      ),
+                    );
+                  },
+                ),
               ],
             ),
           ),
