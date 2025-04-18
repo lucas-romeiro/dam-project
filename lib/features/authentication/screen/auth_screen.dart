@@ -51,6 +51,7 @@ class AuthScreen extends StatelessWidget {
                     );
                   },
                 ),
+                const SizedBox(height: 8),
                 Button(
                   label: "SIGN UP",
                   press: () {
@@ -62,6 +63,7 @@ class AuthScreen extends StatelessWidget {
                     );
                   },
                 ),
+                const SizedBox(height: 25),
               ],
             ),
           ),

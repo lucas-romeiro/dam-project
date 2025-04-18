@@ -6,4 +6,9 @@ class DeviceUtils {
   static double getScreenWidth(BuildContext context) {
     return MediaQuery.of(context).size.width;
   }
+
+  static double getKeyboardHeight(BuildContext context) {
+    final viewInsets = MediaQuery.of(context).viewInsets;
+    return viewInsets.bottom;
+  }
 }

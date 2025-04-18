@@ -11,7 +11,6 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8),
       width: DeviceUtils.getScreenWidth(context) * .9,
       height: 55,
       decoration: BoxDecoration(
