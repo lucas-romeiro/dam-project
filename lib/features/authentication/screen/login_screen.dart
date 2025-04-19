@@ -24,88 +24,91 @@ class _LoginScreenState extends State<LoginScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       body: SafeArea(
-        child: SingleChildScrollView(
-          padding: EdgeInsets.only(
-            bottom: DeviceUtils.getKeyboardHeight(context) + 16,
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              // Header
-              const Text(
-                "LOGIN",
-                style: TextStyle(
-                  color: AppColors.primary,
-                  fontSize: 40,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const SizedBox(height: 10),
-              Image.asset("assets/images/login/authentication-image-3.png"),
-              const SizedBox(height: 10),
-
-              // Input text area
-              InputField(
-                hint: "Username",
-                icon: Icons.account_circle,
-                controller: userName,
-              ),
-              const SizedBox(height: 6),
-              InputField(
-                hint: "Password",
-                icon: Icons.lock,
-                controller: password,
-                passwordInvisible: true,
-              ),
-
-              // Stay login
-              ListTile(
-                horizontalTitleGap: 2,
-                title: Text("Remember me"),
-                leading: Checkbox(
-                  activeColor: AppColors.primary,
-                  value: isChecked,
-                  onChanged: (value) {
-                    setState(() {
-                      isChecked = !isChecked;
-                    });
-                  },
-                ),
-              ),
-
-              // Action button
-              Button(label: "Login", press: () {}),
-
-              // Create account area
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Don't habe an account?",
-                    style: TextStyle(color: AppColors.darkGrey),
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: SingleChildScrollView(
+            padding: EdgeInsets.only(
+              bottom: DeviceUtils.getKeyboardHeight(context) + 16,
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                // Header
+                const Text(
+                  "LOGIN",
+                  style: TextStyle(
+                    color: AppColors.primary,
+                    fontSize: 40,
+                    fontWeight: FontWeight.bold,
                   ),
-                  TextButton(
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SignupScreen(),
-                        ),
-                      );
+                ),
+                const SizedBox(height: 10),
+                Image.asset("assets/images/login/authentication-image-3.png"),
+                const SizedBox(height: 10),
+
+                // Input text area
+                InputField(
+                  hint: "Username",
+                  icon: Icons.account_circle,
+                  controller: userName,
+                ),
+                const SizedBox(height: 6),
+                InputField(
+                  hint: "Password",
+                  icon: Icons.lock,
+                  controller: password,
+                  passwordInvisible: true,
+                ),
+
+                // Stay login
+                ListTile(
+                  horizontalTitleGap: 2,
+                  title: Text("Remember me"),
+                  leading: Checkbox(
+                    activeColor: AppColors.primary,
+                    value: isChecked,
+                    onChanged: (value) {
+                      setState(() {
+                        isChecked = !isChecked;
+                      });
                     },
-                    child: const Text("SIGN UP"),
                   ),
-                ],
-              ),
+                ),
 
-              // Error message
-              isLoginTrue
-                  ? const Text(
-                    "Username or Password is incorrect",
-                    style: TextStyle(color: AppColors.error),
-                  )
-                  : const SizedBox(),
-            ],
+                // Action button
+                Button(label: "Login", press: () {}),
+
+                // Create account area
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text(
+                      "Don't have an account?",
+                      style: TextStyle(color: AppColors.darkGrey),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const SignupScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text("SIGN UP"),
+                    ),
+                  ],
+                ),
+
+                // Error message
+                isLoginTrue
+                    ? const Text(
+                      "Username or Password is incorrect",
+                      style: TextStyle(color: AppColors.error),
+                    )
+                    : const SizedBox(),
+              ],
+            ),
           ),
         ),
       ),
