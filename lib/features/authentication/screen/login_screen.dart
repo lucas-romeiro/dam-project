@@ -4,6 +4,7 @@ import 'package:dam_project/common/widgets/button.dart';
 import 'package:dam_project/utils/device/device_utils.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
 import 'package:dam_project/features/authentication/screen/signup_screen.dart';
+import 'package:dam_project/features/authentication/screen/profile_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -76,7 +77,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
 
                 // Action button
-                Button(label: "Login", press: () {}),
+                Button(
+                  label: "Login",
+                  press: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ProfileScreen(),
+                      ),
+                    );
+                  },
+                ),
 
                 // Create account area
                 Row(
