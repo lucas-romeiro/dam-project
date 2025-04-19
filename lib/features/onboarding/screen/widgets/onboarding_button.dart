@@ -1,3 +1,4 @@
+import 'package:dam_project/features/authentication/screen/auth_screen.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
 import 'package:dam_project/utils/device/device_utils.dart';
 import 'package:flutter/material.dart';
@@ -22,7 +23,7 @@ class OnBoardingButton extends StatelessWidget {
 
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => Placeholder()),
+            MaterialPageRoute(builder: (context) => const AuthScreen()),
           );
         },
         child: const Text("Get started", style: TextStyle(color: Colors.white)),

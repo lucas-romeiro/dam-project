@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:dam_project/features/authentication/controller/auth_controller.dart';
 import 'package:dam_project/features/authentication/data/auth_reposity.dart';
 import 'package:dam_project/features/authentication/model/user_model.dart';
 import 'package:dam_project/common/widgets/textfield.dart';
@@ -24,27 +26,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final db = AuthReposity();
 
-  login() async {
-    User? userDetails = await db.getUser(userName.text);
-
-    final res = await db.authenticate(
-      User(username: userName.text, password: password.text),
-    );
-
-    if (res == true) {
-      if (!mounted) return;
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => ProfileScreen(profile: userDetails),
-        ),
-      );
-    } else {
-      setState(() {
-        isLoginTrue = true;
-      });
-    }
-  }
+  login() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -89,25 +71,56 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
 
                   // Stay login
-                  ListTile(
-                    horizontalTitleGap: 2,
-                    title: Text("Remember me"),
-                    leading: Checkbox(
-                      activeColor: AppColors.primary,
-                      value: isChecked,
-                      onChanged: (value) {
-                        setState(() {
-                          isChecked = !isChecked;
-                        });
-                      },
-                    ),
+                  Consumer<AuthController>(
+                    builder: (context, AuthController notifier, child) {
+                      return ListTile(
+                        horizontalTitleGap: 2,
+                        title: Text("Remember me"),
+                        leading: Checkbox(
+                          activeColor: AppColors.primary,
+                          value: notifier.isChecked,
+                          onChanged: (value) => notifier.toogleCheck(),
+                        ),
+                      );
+                    },
                   ),
 
                   // Action button
-                  Button(
-                    label: "Login",
-                    press: () {
-                      login();
+                  Consumer<AuthController>(
+                    builder: (context, AuthController notifier, child) {
+                      return Button(
+                        label: "Login",
+                        press: () async {
+                          User? userDetails = await db.getUser(userName.text);
+
+                          final res = await db.authenticate(
+                            User(
+                              username: userName.text,
+                              password: password.text,
+                            ),
+                          );
+
+                          if (res == true) {
+                            if (notifier.isChecked == true) {
+                              notifier.setRememberMe();
+                            }
+
+                            if (!mounted) return;
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) =>
+                                        ProfileScreen(profile: userDetails),
+                              ),
+                            );
+                          } else {
+                            setState(() {
+                              isLoginTrue = true;
+                            });
+                          }
+                        },
+                      );
                     },
                   ),
 

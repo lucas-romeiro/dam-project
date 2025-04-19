@@ -1,8 +1,9 @@
-import 'package:dam_project/features/authentication/model/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:dam_project/features/authentication/controller/auth_controller.dart';
+import 'package:dam_project/features/authentication/model/user_model.dart';
 import 'package:dam_project/common/widgets/button.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
-import 'package:dam_project/features/authentication/screen/login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   final User? profile;
@@ -40,14 +41,13 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
 
-              Button(
-                label: "SIGN UP",
-                press: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const LoginScreen(),
-                    ),
+              Consumer<AuthController>(
+                builder: (context, AuthController notifier, child) {
+                  return Button(
+                    label: "SIGN OUT",
+                    press: () {
+                      notifier.logout(context);
+                    },
                   );
                 },
               ),
