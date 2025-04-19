@@ -20,27 +20,36 @@ class _SignupScreenState extends State<SignupScreen> {
   final userName = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
+  bool isUserExist = false;
 
   final db = AuthReposity();
 
   signUp() async {
-    var res = await db.createUser(
-      User(
-        fullName: fullName.text,
-        email: email.text,
-        username: userName.text,
-        password: password.text,
-      ),
-    );
+    bool userExist = await db.usernameExists(userName.text);
 
-    if (res > 0) {
-      if (!mounted) return;
-
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const LoginScreen()),
+    if (userExist) {
+      setState(() {
+        isUserExist = true;
+      });
+    } else {
+      var res = await db.createUser(
+        User(
+          fullName: fullName.text,
+          email: email.text,
+          username: userName.text,
+          password: password.text,
+        ),
       );
-    } else {}
+
+      if (res > 0) {
+        if (!mounted) return;
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => const LoginScreen()),
+        );
+      }
+    }
   }
 
   @override
@@ -135,6 +144,13 @@ class _SignupScreenState extends State<SignupScreen> {
                       ),
                     ],
                   ),
+
+                  isUserExist
+                      ? const Text(
+                        "User already exists, please enter another username",
+                        style: TextStyle(color: AppColors.error),
+                      )
+                      : const SizedBox(),
                 ],
               ),
             ),
