@@ -1,8 +1,8 @@
-import 'package:dam_project/features/authentication/screen/auth_screen.dart';
-import 'package:dam_project/features/onboarding/screen/onboarding_screen.dart';
-import 'package:dam_project/utils/constants/app_colors.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+import 'package:dam_project/features/authentication/screen/auth_screen.dart';
+// import 'package:dam_project/features/onboarding/screen/onboarding_screen.dart';
+import 'package:dam_project/utils/constants/app_colors.dart';
 
 class App extends StatelessWidget {
   final bool onboarding;

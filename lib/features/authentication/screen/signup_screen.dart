@@ -1,8 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:dam_project/common/widgets/button.dart';
 import 'package:dam_project/common/widgets/textfield.dart';
+import 'package:dam_project/features/authentication/data/auth_reposity.dart';
+import 'package:dam_project/features/authentication/model/user_model.dart';
 import 'package:dam_project/features/authentication/screen/login_screen.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
-import 'package:flutter/material.dart';
 import 'package:dam_project/utils/device/device_utils.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -18,6 +20,28 @@ class _SignupScreenState extends State<SignupScreen> {
   final userName = TextEditingController();
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
+
+  final db = AuthReposity();
+
+  signUp() async {
+    var res = await db.createUser(
+      User(
+        fullName: fullName.text,
+        email: email.text,
+        username: userName.text,
+        password: password.text,
+      ),
+    );
+
+    if (res > 0) {
+      if (!mounted) return;
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => const LoginScreen()),
+      );
+    } else {}
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -84,7 +108,12 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   const SizedBox(height: 20),
 
-                  Button(label: "SIGN UP", press: () {}),
+                  Button(
+                    label: "SIGN UP",
+                    press: () {
+                      signUp();
+                    },
+                  ),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,

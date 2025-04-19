@@ -1,10 +1,13 @@
+import 'package:dam_project/features/authentication/model/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:dam_project/common/widgets/button.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
 import 'package:dam_project/features/authentication/screen/login_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+  final User? profile;
+
+  const ProfileScreen({super.key, this.profile});
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +30,13 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
 
-              const Text(
-                "John Doe",
-                style: TextStyle(fontSize: 25, color: AppColors.primary),
+              Text(
+                profile?.fullName ?? "",
+                style: const TextStyle(fontSize: 25, color: AppColors.primary),
               ),
-              const Text(
-                "john.doe@email.com",
-                style: TextStyle(fontSize: 17, color: AppColors.darkGrey),
+              Text(
+                profile?.email ?? "",
+                style: const TextStyle(fontSize: 17, color: AppColors.darkGrey),
               ),
               const SizedBox(height: 10),
 
@@ -49,20 +52,20 @@ class ProfileScreen extends StatelessWidget {
                 },
               ),
 
-              const ListTile(
-                leading: Icon(Icons.person, size: 30),
-                subtitle: Text("Full Name"),
-                title: Text("John Doe"),
+              ListTile(
+                leading: const Icon(Icons.person, size: 30),
+                subtitle: const Text("Full Name"),
+                title: Text(profile?.fullName ?? ""),
               ),
-              const ListTile(
-                leading: Icon(Icons.email, size: 30),
-                subtitle: Text("Email"),
-                title: Text("john.doe@email.com"),
+              ListTile(
+                leading: const Icon(Icons.email, size: 30),
+                subtitle: const Text("Email"),
+                title: Text(profile?.email ?? ""),
               ),
-              const ListTile(
-                leading: Icon(Icons.account_circle, size: 30),
-                subtitle: Text("Username"),
-                title: Text("admin"),
+              ListTile(
+                leading: const Icon(Icons.account_circle, size: 30),
+                subtitle: const Text("Username"),
+                title: Text(profile?.username ?? ""),
               ),
             ],
           ),
