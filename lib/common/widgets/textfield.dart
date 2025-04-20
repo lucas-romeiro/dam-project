@@ -7,6 +7,8 @@ class InputField extends StatelessWidget {
   final IconData icon;
   final bool passwordInvisible;
   final TextEditingController controller;
+  final String? Function(String?)?
+  validator; // Adicionando validator como parâmetro
 
   const InputField({
     super.key,
@@ -14,6 +16,7 @@ class InputField extends StatelessWidget {
     required this.icon,
     required this.controller,
     this.passwordInvisible = false,
+    this.validator, // Inicializa o validator
   });
 
   @override
@@ -26,11 +29,11 @@ class InputField extends StatelessWidget {
         color: AppColors.white,
         borderRadius: BorderRadius.circular(8),
       ),
-
       child: Center(
         child: TextFormField(
           obscureText: passwordInvisible,
           controller: controller,
+          validator: validator, // Usando o validator
           decoration: InputDecoration(
             border: InputBorder.none,
             hintText: hint,
