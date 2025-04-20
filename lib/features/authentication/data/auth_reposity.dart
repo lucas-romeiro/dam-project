@@ -10,6 +10,11 @@ class AuthReposity {
 
   static Database? _database;
 
+  // SQL para deletar a tabela (caso ela já exista)
+  static const String _dropTableSQL = '''
+  DROP TABLE IF EXISTS $_tableName;
+''';
+
   // SQL para criação da tabela
   static const String _createTableSQL = '''
     CREATE TABLE $_tableName (
@@ -29,16 +34,27 @@ class AuthReposity {
     return _database!;
   }
 
-  // Inicializa o banco
+  // Inicializa o banco de dados
   Future<Database> _initDB() async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, _dbName);
 
     return await openDatabase(
       path,
-      version: 1,
+      version: 2, // Incrementa a versão do banco de dados
       onCreate: (db, version) async {
+        // Drop a tabela se ela já existir
+        await db.execute(_dropTableSQL);
+
+        // Criar a nova tabela com a estrutura atualizada
         await db.execute(_createTableSQL);
+      },
+      onUpgrade: (db, oldVersion, newVersion) async {
+        if (oldVersion < newVersion) {
+          // Caso a versão do banco seja atualizada, exclua a tabela existente e crie uma nova
+          await db.execute(_dropTableSQL);
+          await db.execute(_createTableSQL);
+        }
       },
     );
   }
@@ -111,8 +127,7 @@ class AuthReposity {
     return await db.update(
       _tableName,
       userMap,
-      where:
-          'email = ?', // Usando o `email` como referência para identificar o usuário
+      where: 'email = ?',
       whereArgs: [user.email],
     );
   }
