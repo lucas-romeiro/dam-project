@@ -18,7 +18,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  final userName = TextEditingController();
+  final email = TextEditingController(); // Alterado de username para email
   final password = TextEditingController();
 
   bool isChecked = false;
@@ -58,9 +58,9 @@ class _LoginScreenState extends State<LoginScreen> {
 
                   // Input text area
                   InputField(
-                    hint: "Username",
-                    icon: Icons.account_circle,
-                    controller: userName,
+                    hint: "Email", // Alterado de Username para Email
+                    icon: Icons.email,
+                    controller: email, // Alterado para email
                   ),
                   const SizedBox(height: 6),
                   InputField(
@@ -91,11 +91,14 @@ class _LoginScreenState extends State<LoginScreen> {
                       return Button(
                         label: "Login",
                         press: () async {
-                          User? userDetails = await db.getUser(userName.text);
+                          User? userDetails = await db.getUser(
+                            email.text,
+                          ); // Alterado de username para email
 
                           final res = await db.authenticate(
                             User(
-                              username: userName.text,
+                              fullName: "",
+                              email: email.text, // Alterado para email
                               password: password.text,
                             ),
                           );
@@ -149,7 +152,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   // Error message
                   isLoginTrue
                       ? const Text(
-                        "Username or Password is incorrect",
+                        "Email or Password is incorrect",
                         style: TextStyle(color: AppColors.error),
                       )
                       : const SizedBox(),

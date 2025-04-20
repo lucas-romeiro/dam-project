@@ -1,55 +1,39 @@
-import 'dart:convert';
-
-// Converters
-User userFromJson(String str) => User.fromJson(json.decode(str));
-String userToJson(User data) => json.encode(data.toJson());
-
 class User {
   final int? id;
-  final String? fullName;
-  final String? email;
-  final String username;
+  final String fullName;
+  final String email; // agora o email é único
   final String password;
+  final String? diet;
+  final int? calories;
 
   User({
     this.id,
-    this.fullName,
-    this.email,
-    required this.username,
+    required this.fullName,
+    required this.email,
     required this.password,
+    this.diet,
+    this.calories,
   });
 
-  // Para salvar no banco
-  Map<String, dynamic> toMap() => {
-    'id': id,
-    'fullName': fullName,
-    'email': email,
-    'username': username,
-    'password': password,
-  };
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'fullName': fullName,
+      'email': email,
+      'password': password,
+      'diet': diet,
+      'calories': calories,
+    };
+  }
 
-  factory User.fromMap(Map<String, dynamic> map) => User(
-    id: map['id'],
-    fullName: map['fullName'],
-    email: map['email'],
-    username: map['username'],
-    password: map['password'],
-  );
-
-  // Para JSON (opcionalmente escondendo a senha)
-  Map<String, dynamic> toJson() => {
-    'id': id,
-    'fullName': fullName,
-    'email': email,
-    'username': username,
-    // 'password': password, // Opcional: não incluir
-  };
-
-  factory User.fromJson(Map<String, dynamic> json) => User(
-    id: json['id'],
-    fullName: json['fullName'],
-    email: json['email'],
-    username: json['username'],
-    password: json['password'],
-  );
+  factory User.fromMap(Map<String, dynamic> map) {
+    return User(
+      id: map['id'],
+      fullName: map['fullName'],
+      email: map['email'],
+      password: map['password'],
+      diet: map['diet'],
+      calories: map['calories'],
+    );
+  }
 }

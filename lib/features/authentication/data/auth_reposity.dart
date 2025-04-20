@@ -15,9 +15,10 @@ class AuthReposity {
     CREATE TABLE $_tableName (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       fullName TEXT NOT NULL,
-      email TEXT NOT NULL,
-      username TEXT UNIQUE NOT NULL,
-      password TEXT NOT NULL
+      email TEXT UNIQUE NOT NULL,
+      password TEXT NOT NULL,
+      diet TEXT,
+      calories INTEGER
     )
   ''';
 
@@ -54,8 +55,8 @@ class AuthReposity {
 
     final result = await db.query(
       _tableName,
-      where: 'username = ? AND password = ?',
-      whereArgs: [user.username, hashedPassword],
+      where: 'email = ? AND password = ?',
+      whereArgs: [user.email, hashedPassword],
     );
 
     return result.isNotEmpty;
@@ -70,27 +71,49 @@ class AuthReposity {
     return await db.insert(_tableName, userMap);
   }
 
-  // Busca usuário pelo nome de usuário
-  Future<User?> getUser(String username) async {
+  // Busca usuário pelo email
+  Future<User?> getUser(String email) async {
     final db = await database;
 
     final result = await db.query(
       _tableName,
-      where: 'username = ?',
-      whereArgs: [username],
+      where: 'email = ?',
+      whereArgs: [email],
     );
 
     return result.isNotEmpty ? User.fromMap(result.first) : null;
   }
 
-  // (Opcional) Verifica se nome de usuário já existe
-  Future<bool> usernameExists(String username) async {
+  // Verifica se email já existe
+  Future<bool> emailExists(String email) async {
     final db = await database;
     final result = await db.query(
       _tableName,
-      where: 'username = ?',
-      whereArgs: [username],
+      where: 'email = ?',
+      whereArgs: [email],
     );
     return result.isNotEmpty;
+  }
+
+  // Função para atualizar os dados do usuário
+  Future<int> updateUser(User user) async {
+    final db = await database;
+
+    // Criação do mapa de dados para atualização
+    final userMap = {
+      'fullName': user.fullName,
+      'email': user.email,
+      'diet': user.diet,
+      'calories': user.calories,
+    };
+
+    // Atualização do usuário no banco de dados
+    return await db.update(
+      _tableName,
+      userMap,
+      where:
+          'email = ?', // Usando o `email` como referência para identificar o usuário
+      whereArgs: [user.email],
+    );
   }
 }

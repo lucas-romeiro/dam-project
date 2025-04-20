@@ -19,6 +19,7 @@ class ProfileScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // Avatar
               CircleAvatar(
                 backgroundColor: AppColors.primary,
                 radius: 78,
@@ -31,6 +32,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
 
+              // Nome e Email
               Text(
                 profile?.fullName ?? "",
                 style: const TextStyle(fontSize: 25, color: AppColors.primary),
@@ -41,6 +43,7 @@ class ProfileScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
 
+              // Botão de logout
               Consumer<AuthController>(
                 builder: (context, AuthController notifier, child) {
                   return Button(
@@ -52,6 +55,7 @@ class ProfileScreen extends StatelessWidget {
                 },
               ),
 
+              // Lista de informações
               ListTile(
                 leading: const Icon(Icons.person, size: 30),
                 subtitle: const Text("Full Name"),
@@ -62,10 +66,16 @@ class ProfileScreen extends StatelessWidget {
                 subtitle: const Text("Email"),
                 title: Text(profile?.email ?? ""),
               ),
+
               ListTile(
-                leading: const Icon(Icons.account_circle, size: 30),
-                subtitle: const Text("Username"),
-                title: Text(profile?.username ?? ""),
+                leading: const Icon(Icons.restaurant, size: 30),
+                subtitle: const Text("Diet"),
+                title: Text(profile?.diet ?? ""),
+              ),
+              ListTile(
+                leading: const Icon(Icons.local_fire_department, size: 30),
+                subtitle: const Text("Target Calories"),
+                title: Text(profile?.calories.toString() ?? "2000"),
               ),
             ],
           ),

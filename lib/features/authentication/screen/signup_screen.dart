@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:dam_project/common/widgets/button.dart';
 import 'package:dam_project/common/widgets/textfield.dart';
+import 'package:dam_project/features/authentication/screen/widgets/diet_dropdown.dart';
+import 'package:dam_project/features/authentication/screen/widgets/calorie_slider.dart';
 import 'package:dam_project/features/authentication/data/auth_reposity.dart';
 import 'package:dam_project/features/authentication/model/user_model.dart';
 import 'package:dam_project/features/authentication/screen/login_screen.dart';
@@ -17,15 +19,25 @@ class SignupScreen extends StatefulWidget {
 class _SignupScreenState extends State<SignupScreen> {
   final fullName = TextEditingController();
   final email = TextEditingController();
-  final userName = TextEditingController();
+  final diet = TextEditingController(text: 'None');
+  final calories = TextEditingController(text: '2000');
   final password = TextEditingController();
   final confirmPassword = TextEditingController();
+
   bool isUserExist = false;
 
   final db = AuthReposity();
 
   signUp() async {
-    bool userExist = await db.usernameExists(userName.text);
+    // Verifica se senha e confirmação batem
+    if (password.text != confirmPassword.text) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text("Passwords do not match")));
+      return;
+    }
+
+    bool userExist = await db.emailExists(email.text);
 
     if (userExist) {
       setState(() {
@@ -36,8 +48,9 @@ class _SignupScreenState extends State<SignupScreen> {
         User(
           fullName: fullName.text,
           email: email.text,
-          username: userName.text,
           password: password.text,
+          diet: diet.text,
+          calories: int.tryParse(calories.text) ?? 2000,
         ),
       );
 
@@ -68,9 +81,9 @@ class _SignupScreenState extends State<SignupScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   // Page Title
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: const Text(
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    child: Text(
                       "Register New Account",
                       style: TextStyle(
                         color: AppColors.primary,
@@ -83,25 +96,43 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   const SizedBox(height: 60),
 
-                  // InputField Area
+                  // Input Fields
                   InputField(
                     hint: "Full Name",
                     icon: Icons.person,
                     controller: fullName,
                   ),
                   const SizedBox(height: 6),
+
                   InputField(
                     hint: "Email",
                     icon: Icons.email,
                     controller: email,
                   ),
                   const SizedBox(height: 6),
-                  InputField(
-                    hint: "Username",
-                    icon: Icons.account_circle,
-                    controller: userName,
+
+                  // Diet Dropdown
+                  DietDropdown(
+                    diets: [
+                      'None',
+                      'Gluten Free',
+                      'Ketogenic',
+                      'Lacto-Vegetarian',
+                      'Ovo-Vegetarian',
+                      'Vegan',
+                      'Pescetarian',
+                      'Paleo',
+                      'Primal',
+                      'Whole30',
+                    ],
+                    controller: diet,
                   ),
                   const SizedBox(height: 6),
+
+                  // Calories Slider
+                  CalorieSlider(controller: calories),
+                  const SizedBox(height: 6),
+
                   InputField(
                     hint: "Password",
                     icon: Icons.lock,
@@ -109,6 +140,7 @@ class _SignupScreenState extends State<SignupScreen> {
                     passwordInvisible: true,
                   ),
                   const SizedBox(height: 6),
+
                   InputField(
                     hint: "Confirm Password",
                     icon: Icons.lock,
@@ -117,12 +149,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   ),
                   const SizedBox(height: 20),
 
-                  Button(
-                    label: "SIGN UP",
-                    press: () {
-                      signUp();
-                    },
-                  ),
+                  // Sign Up Button
+                  Button(label: "SIGN UP", press: signUp),
+                  const SizedBox(height: 10),
 
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -145,12 +174,14 @@ class _SignupScreenState extends State<SignupScreen> {
                     ],
                   ),
 
-                  isUserExist
-                      ? const Text(
+                  if (isUserExist)
+                    const Padding(
+                      padding: EdgeInsets.only(top: 8),
+                      child: Text(
                         "User already exists, please enter another username",
                         style: TextStyle(color: AppColors.error),
-                      )
-                      : const SizedBox(),
+                      ),
+                    ),
                 ],
               ),
             ),
