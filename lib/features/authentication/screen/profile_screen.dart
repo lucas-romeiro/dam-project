@@ -1,0 +1,86 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:dam_project/features/authentication/controller/auth_controller.dart';
+import 'package:dam_project/features/authentication/model/user_model.dart';
+import 'package:dam_project/common/widgets/button.dart';
+import 'package:dam_project/utils/constants/app_colors.dart';
+
+class ProfileScreen extends StatelessWidget {
+  final User? profile;
+
+  const ProfileScreen({super.key, this.profile});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: EdgeInsets.symmetric(horizontal: 20, vertical: 45),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // Avatar
+              CircleAvatar(
+                backgroundColor: AppColors.primary,
+                radius: 78,
+                child: CircleAvatar(
+                  backgroundImage: AssetImage(
+                    "assets/images/login/no-user.png",
+                  ),
+                  radius: 75,
+                ),
+              ),
+              const SizedBox(height: 10),
+
+              // Nome e Email
+              Text(
+                profile?.fullName ?? "",
+                style: const TextStyle(fontSize: 25, color: AppColors.primary),
+              ),
+              Text(
+                profile?.email ?? "",
+                style: const TextStyle(fontSize: 17, color: AppColors.darkGrey),
+              ),
+              const SizedBox(height: 10),
+
+              // Botão de logout
+              Consumer<AuthController>(
+                builder: (context, AuthController notifier, child) {
+                  return Button(
+                    label: "SIGN OUT",
+                    press: () {
+                      notifier.logout(context);
+                    },
+                  );
+                },
+              ),
+
+              // Lista de informações
+              ListTile(
+                leading: const Icon(Icons.person, size: 30),
+                subtitle: const Text("Full Name"),
+                title: Text(profile?.fullName ?? ""),
+              ),
+              ListTile(
+                leading: const Icon(Icons.email, size: 30),
+                subtitle: const Text("Email"),
+                title: Text(profile?.email ?? ""),
+              ),
+
+              ListTile(
+                leading: const Icon(Icons.restaurant, size: 30),
+                subtitle: const Text("Diet"),
+                title: Text(profile?.diet ?? ""),
+              ),
+              ListTile(
+                leading: const Icon(Icons.local_fire_department, size: 30),
+                subtitle: const Text("Target Calories"),
+                title: Text(profile?.calories.toString() ?? "2000"),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
