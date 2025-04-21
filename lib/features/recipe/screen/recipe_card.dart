@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:iconsax/iconsax.dart';
-
 import 'package:dam_project/utils/constants/app_colors.dart';
 import 'package:dam_project/features/recipe/model/recipe_model.dart';
-import 'package:dam_project/features/recipe/screen/recipe_detail_screen.dart'; // Importa seu controller
+import 'package:dam_project/features/recipe/screen/recipe_detail_screen.dart';
 import 'package:dam_project/features/favorites/controller/favorites_controller.dart';
 
 class RecipeCard extends StatelessWidget {

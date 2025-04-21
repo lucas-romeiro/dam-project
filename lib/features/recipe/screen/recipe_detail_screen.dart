@@ -1,11 +1,11 @@
-import 'package:dam_project/features/favorites/controller/favorites_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
+import 'package:dam_project/features/favorites/controller/favorites_controller.dart';
 import 'package:dam_project/features/recipe/model/recipe_model.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
 import 'package:dam_project/utils/device/device_utils.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:provider/provider.dart';
 
 class RecipeDetailScreen extends StatefulWidget {
   final Recipe recipe;

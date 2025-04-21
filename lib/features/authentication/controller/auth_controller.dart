@@ -10,10 +10,6 @@ class AuthController extends ChangeNotifier {
 
   late SharedPreferences storage;
 
-  AuthController() {
-    initStorage();
-  }
-
   // Form controllers
   final email = TextEditingController();
   final password = TextEditingController();

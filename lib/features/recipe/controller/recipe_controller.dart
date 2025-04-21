@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:dam_project/features/recipe/model/recipe_model.dart';
 import 'package:dam_project/features/recipe/services/recipe_service.dart';
+import 'dart:async';
 
 class RecipeController extends ChangeNotifier {
   final RecipeService _service;
@@ -11,6 +12,7 @@ class RecipeController extends ChangeNotifier {
   List<Recipe> _filteredRecipes = [];
 
   List<Recipe> get recipes => _filteredRecipes;
+  List<Recipe> get filteredRecipes => _filteredRecipes; // Adicionado aqui ✅
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -25,6 +27,7 @@ class RecipeController extends ChangeNotifier {
 
   String _searchQuery = '';
   String get searchQuery => _searchQuery;
+  Timer? _debounce;
 
   final List<String> menuItems = [
     'Breakfast',
@@ -54,20 +57,30 @@ class RecipeController extends ChangeNotifier {
 
   void setSelectedIndex(int index) {
     _selectedRecipeId = index;
-    _selectedRecipe = _allRecipes.isNotEmpty ? _allRecipes[index] : null;
+
+    if (_allRecipes.isNotEmpty && index < _allRecipes.length) {
+      _selectedRecipe = _allRecipes[index];
+    } else {
+      _selectedRecipe = null;
+    }
+
     _filterRecipes();
     notifyListeners();
   }
 
   void setSelectedRecipe(Recipe recipe) {
-    _selectedRecipe = recipe; // Define a receita selecionada
+    _selectedRecipe = recipe;
     notifyListeners();
   }
 
   void searchRecipes(String query) {
     _searchQuery = query;
-    _filterRecipes();
-    notifyListeners();
+
+    _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 1000), () {
+      _filterRecipes();
+      notifyListeners();
+    });
   }
 
   void _filterRecipes() {

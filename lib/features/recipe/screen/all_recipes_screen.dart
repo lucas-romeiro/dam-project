@@ -1,6 +1,5 @@
-import 'package:dam_project/utils/device/device_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:iconsax/iconsax.dart';
+import 'package:dam_project/utils/device/device_utils.dart';
 import 'package:dam_project/features/recipe/model/recipe_model.dart';
 import 'package:dam_project/features/recipe/screen/recipe_card.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
