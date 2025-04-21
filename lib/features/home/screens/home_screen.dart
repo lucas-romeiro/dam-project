@@ -1,5 +1,8 @@
 import 'package:dam_project/features/authentication/model/user_model.dart';
+import 'package:dam_project/features/recipe/model/recipe_model.dart';
+import 'package:dam_project/features/recipe/screen/all_recipes_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:path/path.dart';
 import 'package:provider/provider.dart';
 import 'package:dam_project/common/widgets/menu_selector.dart';
 import 'package:dam_project/features/home/screens/widgets/home_banner.dart';
@@ -59,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                       const SizedBox(height: 40),
 
                       // Categories
-                      categories(),
+                      categories(context, recipes),
                       const SizedBox(height: 20),
 
                       MenuItemSelector(
@@ -99,22 +102,32 @@ class HomeScreen extends StatelessWidget {
     );
   }
 
-  Padding categories() {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
+  Padding categories(BuildContext context, List<Recipe> recipes) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(
+          const Text(
             "Categories",
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
           ),
-          Text(
-            "See all",
-            style: TextStyle(
-              fontSize: 14,
-              color: AppColors.primary,
-              fontWeight: FontWeight.w500,
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => AllRecipesScreen(recipes: recipes),
+                ),
+              );
+            },
+            child: Text(
+              "See all",
+              style: TextStyle(
+                fontSize: 14,
+                color: AppColors.primary,
+                fontWeight: FontWeight.w500,
+              ),
             ),
           ),
         ],
