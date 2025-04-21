@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CalorieSlider extends StatefulWidget {
-  final TextEditingController controller;
+  final ValueNotifier<int> controller;
 
   const CalorieSlider({super.key, required this.controller});
 
@@ -15,7 +15,7 @@ class _CalorieSliderState extends State<CalorieSlider> {
   @override
   void initState() {
     super.initState();
-    _calories = double.tryParse(widget.controller.text) ?? 2000;
+    _calories = widget.controller.value.toDouble(); // Converte para double
   }
 
   @override
@@ -50,7 +50,8 @@ class _CalorieSliderState extends State<CalorieSlider> {
             onChanged: (value) {
               setState(() {
                 _calories = value;
-                widget.controller.text = value.toInt().toString();
+                widget.controller.value =
+                    value.toInt(); // Atualiza o ValueNotifier
               });
             },
           ),

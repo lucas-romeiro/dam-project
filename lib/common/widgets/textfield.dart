@@ -3,20 +3,21 @@ import 'package:dam_project/utils/device/device_utils.dart';
 import 'package:flutter/material.dart';
 
 class InputField extends StatelessWidget {
-  final String hint;
+  final String label;
   final IconData icon;
-  final bool passwordInvisible;
+  final bool isVisible;
   final TextEditingController controller;
-  final String? Function(String?)?
-  validator; // Adicionando validator como parâmetro
+  final String? Function(String?)? validator;
+  final Widget? suffixIcon;
 
   const InputField({
     super.key,
-    required this.hint,
+    required this.label,
     required this.icon,
     required this.controller,
-    this.passwordInvisible = false,
-    this.validator, // Inicializa o validator
+    this.isVisible = false,
+    this.validator,
+    this.suffixIcon,
   });
 
   @override
@@ -31,13 +32,15 @@ class InputField extends StatelessWidget {
       ),
       child: Center(
         child: TextFormField(
-          obscureText: passwordInvisible,
+          obscureText: isVisible,
           controller: controller,
-          validator: validator, // Usando o validator
+          validator: validator,
+          autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             border: InputBorder.none,
-            hintText: hint,
+            hintText: label,
             icon: Icon(icon),
+            suffixIcon: suffixIcon,
           ),
         ),
       ),
