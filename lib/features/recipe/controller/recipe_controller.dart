@@ -18,8 +18,10 @@ class RecipeController extends ChangeNotifier {
   String? _error;
   String? get error => _error;
 
-  int _selectedIndex = 0;
-  int get selectedIndex => _selectedIndex;
+  int? _selectedRecipeId;
+  Recipe? _selectedRecipe;
+  int get selectedIndex => _selectedRecipeId ?? 0;
+  Recipe? get selectedRecipeDetail => _selectedRecipe;
 
   String _searchQuery = '';
   String get searchQuery => _searchQuery;
@@ -51,8 +53,14 @@ class RecipeController extends ChangeNotifier {
   }
 
   void setSelectedIndex(int index) {
-    _selectedIndex = index;
+    _selectedRecipeId = index;
+    _selectedRecipe = _allRecipes.isNotEmpty ? _allRecipes[index] : null;
     _filterRecipes();
+    notifyListeners();
+  }
+
+  void setSelectedRecipe(Recipe recipe) {
+    _selectedRecipe = recipe; // Define a receita selecionada
     notifyListeners();
   }
 
@@ -63,7 +71,7 @@ class RecipeController extends ChangeNotifier {
   }
 
   void _filterRecipes() {
-    final selectedCategory = menuItems[_selectedIndex].toLowerCase();
+    final selectedCategory = menuItems[selectedIndex].toLowerCase();
 
     _filteredRecipes =
         _allRecipes.where((recipe) {
