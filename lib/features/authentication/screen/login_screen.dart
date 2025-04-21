@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:dam_project/common/widgets/textfield.dart';
 import 'package:dam_project/common/widgets/button.dart';
 import 'package:dam_project/common/controllers/input_controller.dart'; // <-- Importa o InputController
-import 'package:dam_project/features/home/screens/home_screen.dart';
+import 'package:dam_project/features/home/screens/main_navigation.dart';
 import 'package:dam_project/features/authentication/controller/auth_controller.dart';
 import 'package:dam_project/features/authentication/screen/signup_screen.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
@@ -89,7 +89,7 @@ class LoginScreen extends StatelessWidget {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (_) => const HomeScreen(),
+                              builder: (_) => const MainNavigation(),
                             ),
                           );
                         }

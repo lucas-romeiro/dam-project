@@ -4,7 +4,7 @@ import 'package:dam_project/features/authentication/screen/auth_screen.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
 import 'package:dam_project/features/onboarding/screen/onboarding_screen.dart';
 import 'package:dam_project/features/authentication/controller/auth_controller.dart';
-import 'package:dam_project/features/home/screens/home_screen.dart';
+import 'package:dam_project/features/home/screens/main_navigation.dart';
 
 class App extends StatelessWidget {
   final bool onboarding;
@@ -36,6 +36,6 @@ class App extends StatelessWidget {
 
 Widget _buildInitialScreen(bool onboarding, AuthController authController) {
   if (!onboarding) return const OnBoardingScreen();
-  if (authController.rememberMe) return const HomeScreen();
+  if (authController.rememberMe) return const MainNavigation();
   return AuthScreen();
 }

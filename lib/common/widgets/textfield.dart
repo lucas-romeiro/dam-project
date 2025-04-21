@@ -27,8 +27,8 @@ class InputField extends StatelessWidget {
       width: DeviceUtils.getScreenWidth(context) * .9,
       height: 55,
       decoration: BoxDecoration(
-        color: AppColors.white,
-        borderRadius: BorderRadius.circular(8),
+        color: AppColors.lightGrey,
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Center(
         child: TextFormField(

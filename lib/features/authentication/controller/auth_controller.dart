@@ -10,6 +10,10 @@ class AuthController extends ChangeNotifier {
 
   late SharedPreferences storage;
 
+  AuthController() {
+    initStorage();
+  }
+
   // Form controllers
   final email = TextEditingController();
   final password = TextEditingController();
@@ -26,6 +30,7 @@ class AuthController extends ChangeNotifier {
   bool isUserExist = false;
   User? _loggedUser;
   User? get loggedUser => _loggedUser;
+  bool get isLoggedIn => _loggedUser != null;
   bool isInitialized = false;
 
   // Init SharedPreferences
@@ -33,7 +38,6 @@ class AuthController extends ChangeNotifier {
     storage = await SharedPreferences.getInstance();
     _rememberMe = storage.getBool("rememberMe") ?? false;
 
-    // Se lembrar-me estiver ativado, tenta carregar usuário salvo
     if (_rememberMe && storage.containsKey("user")) {
       String? userJson = storage.getString("user");
       if (userJson != null) {
