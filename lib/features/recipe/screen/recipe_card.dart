@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:dam_project/utils/constants/app_colors.dart';
 import 'package:dam_project/features/recipe/model/recipe_model.dart';
 import 'package:dam_project/features/recipe/screen/recipe_detail_screen.dart';
 
@@ -33,17 +35,22 @@ class RecipeCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Container(
-              padding: const EdgeInsets.all(5),
-              margin: const EdgeInsets.all(5),
-              decoration: const BoxDecoration(
-                shape: BoxShape.circle,
-                color: Colors.black45,
-              ),
-              child: const Icon(
-                Icons.favorite_border,
-                color: Colors.white,
-                size: 18,
+            GestureDetector(
+              onTap: () {
+                // favoritar
+              },
+              child: Container(
+                padding: const EdgeInsets.all(5),
+                margin: const EdgeInsets.all(5),
+                decoration: const BoxDecoration(
+                  shape: BoxShape.circle,
+                  color: Colors.black45,
+                ),
+                child: const Icon(
+                  Iconsax.heart,
+                  color: AppColors.white,
+                  size: 18,
+                ),
               ),
             ),
             Container(
@@ -51,7 +58,7 @@ class RecipeCard extends StatelessWidget {
               width: width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.black45,
+                color: AppColors.black,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,25 +69,28 @@ class RecipeCard extends StatelessWidget {
                     style: const TextStyle(
                       fontSize: 16,
                       height: 0,
-                      color: Colors.white,
+                      color: AppColors.white,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
                   const SizedBox(height: 5),
                   Text(
                     "${recipe.caloriesPerServing} Kcal",
-                    style: const TextStyle(color: Colors.white70, fontSize: 12),
+                    style: const TextStyle(
+                      color: AppColors.darkGrey,
+                      fontSize: 12,
+                    ),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         "⭐ ${recipe.rating}",
-                        style: const TextStyle(color: Colors.white70),
+                        style: const TextStyle(color: AppColors.darkGrey),
                       ),
                       Text(
                         "⏱️ ${recipe.prepTimeMinutes + recipe.cookTimeMinutes} min",
-                        style: const TextStyle(color: Colors.white70),
+                        style: const TextStyle(color: AppColors.darkGrey),
                       ),
                     ],
                   ),
