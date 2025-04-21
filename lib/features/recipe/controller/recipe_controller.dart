@@ -7,8 +7,10 @@ class RecipeController extends ChangeNotifier {
 
   RecipeController(this._service);
 
-  List<Recipe> _recipes = [];
-  List<Recipe> get recipes => _recipes;
+  List<Recipe> _allRecipes = [];
+  List<Recipe> _filteredRecipes = [];
+
+  List<Recipe> get recipes => _filteredRecipes;
 
   bool _isLoading = false;
   bool get isLoading => _isLoading;
@@ -19,12 +21,15 @@ class RecipeController extends ChangeNotifier {
   int _selectedIndex = 0;
   int get selectedIndex => _selectedIndex;
 
+  String _searchQuery = '';
+  String get searchQuery => _searchQuery;
+
   final List<String> menuItems = [
     'Breakfast',
     'Lunch',
     'Dinner',
     'Snack',
-    'Cheat Menu',
+    // 'Cheat Menu',
   ];
 
   List<String> get categories => menuItems;
@@ -35,7 +40,8 @@ class RecipeController extends ChangeNotifier {
     notifyListeners();
 
     try {
-      _recipes = await _service.fetchRecipes();
+      _allRecipes = await _service.fetchRecipes();
+      _filterRecipes(); // Aplica filtro inicial
     } catch (e) {
       _error = e.toString();
     }
@@ -46,6 +52,30 @@ class RecipeController extends ChangeNotifier {
 
   void setSelectedIndex(int index) {
     _selectedIndex = index;
+    _filterRecipes();
     notifyListeners();
+  }
+
+  void searchRecipes(String query) {
+    _searchQuery = query;
+    _filterRecipes();
+    notifyListeners();
+  }
+
+  void _filterRecipes() {
+    final selectedCategory = menuItems[_selectedIndex].toLowerCase();
+
+    _filteredRecipes =
+        _allRecipes.where((recipe) {
+          final matchesCategory = recipe.mealType.any(
+            (type) => type.toLowerCase() == selectedCategory,
+          );
+
+          final matchesSearch = recipe.name.toLowerCase().contains(
+            _searchQuery.toLowerCase(),
+          );
+
+          return matchesCategory && matchesSearch;
+        }).toList();
   }
 }

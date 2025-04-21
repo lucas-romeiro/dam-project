@@ -9,6 +9,7 @@ class InputField extends StatelessWidget {
   final TextEditingController controller;
   final String? Function(String?)? validator;
   final Widget? suffixIcon;
+  final void Function(String)? onChanged; // 👈 ADICIONADO
 
   const InputField({
     super.key,
@@ -18,6 +19,7 @@ class InputField extends StatelessWidget {
     this.isVisible = false,
     this.validator,
     this.suffixIcon,
+    this.onChanged, // 👈 ADICIONADO
   });
 
   @override
@@ -35,6 +37,7 @@ class InputField extends StatelessWidget {
           obscureText: isVisible,
           controller: controller,
           validator: validator,
+          onChanged: onChanged, // 👈 ADICIONADO AQUI
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             border: InputBorder.none,

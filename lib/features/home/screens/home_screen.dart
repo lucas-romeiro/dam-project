@@ -41,12 +41,14 @@ class HomeScreen extends StatelessWidget {
                     children: [
                       headerPart(user),
                       const SizedBox(height: 20),
-
                       InputField(
                         label: "Search any recipe",
                         icon: Icons.search,
                         controller: _searchController,
+                        // onChanged:
+                        //     (value) => recipeController.searchRecipes(value),
                       ),
+
                       const SizedBox(height: 20),
 
                       // Banner
