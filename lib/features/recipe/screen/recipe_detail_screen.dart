@@ -1,9 +1,11 @@
+import 'package:dam_project/features/favorites/controller/favorites_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:dam_project/features/recipe/model/recipe_model.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
 import 'package:dam_project/utils/device/device_utils.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:provider/provider.dart';
 
 class RecipeDetailScreen extends StatefulWidget {
   final Recipe recipe;
@@ -22,7 +24,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: buildBottomButtons(),
+      floatingActionButton: buildBottomButtons(context), // Alterado aqui
       backgroundColor: AppColors.white,
       body: SingleChildScrollView(
         child: Column(
@@ -48,7 +50,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                   top: 50,
                   left: 20,
                   child: CircleAvatar(
-                    backgroundColor: Colors.black38,
+                    backgroundColor: AppColors.softBlack,
                     child: InkWell(
                       onTap: () => Navigator.pop(context),
                       child: const Icon(
@@ -135,7 +137,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                       const SizedBox(width: 5),
                       Text(
                         "(${recipe.reviewCount} reviews)",
-                        style: TextStyle(color: Colors.black.withOpacity(0.6)),
+                        style: TextStyle(color: AppColors.softBlack),
                       ),
                     ],
                   ),
@@ -202,7 +204,11 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   }
 
   /// Botões inferiores: Start Cooking + Favorite
-  Widget buildBottomButtons() {
+  Widget buildBottomButtons(BuildContext context) {
+    final favoritesController = Provider.of<FavoritesController>(context);
+    final recipe = widget.recipe; // Acessando corretamente `recipe` aqui
+    final isFavorite = favoritesController.isFavorite(recipe.id);
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 10),
       child: Row(
@@ -222,16 +228,22 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
           ),
+
+          // Botão de favorito
           Container(
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: Colors.grey.shade300, width: 2),
+              border: Border.all(color: AppColors.lightGrey, width: 2),
             ),
             child: IconButton(
               onPressed: () {
-                // favoritar
+                favoritesController.toggleFavorite(recipe.id);
               },
-              icon: const Icon(Iconsax.heart, color: Colors.black, size: 22),
+              icon: Icon(
+                isFavorite ? Iconsax.heart5 : Iconsax.heart,
+                color: isFavorite ? Colors.red : AppColors.softBlack,
+                size: 22,
+              ),
             ),
           ),
         ],

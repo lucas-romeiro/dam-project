@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:iconsax/iconsax.dart';
+
 import 'package:dam_project/utils/constants/app_colors.dart';
 import 'package:dam_project/features/recipe/model/recipe_model.dart';
-import 'package:dam_project/features/recipe/screen/recipe_detail_screen.dart';
+import 'package:dam_project/features/recipe/screen/recipe_detail_screen.dart'; // Importa seu controller
+import 'package:dam_project/features/favorites/controller/favorites_controller.dart';
 
 class RecipeCard extends StatelessWidget {
   final Recipe recipe;
@@ -35,30 +38,39 @@ class RecipeCard extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            GestureDetector(
-              onTap: () {
-                // favoritar
+            // ⭐ Botão de favorito com Consumer
+            Consumer<FavoritesController>(
+              builder: (context, favoritesController, _) {
+                final isFavorite = favoritesController.isFavorite(recipe.id);
+
+                return GestureDetector(
+                  onTap: () => favoritesController.toggleFavorite(recipe.id),
+                  child: Container(
+                    padding: const EdgeInsets.all(5),
+                    margin: const EdgeInsets.all(5),
+                    decoration: const BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: AppColors.softBlack,
+                    ),
+                    child: Icon(
+                      isFavorite
+                          ? Iconsax.heart5
+                          : Iconsax.heart, // ícone preenchido ou não
+                      color: isFavorite ? Colors.red : AppColors.white,
+                      size: 18,
+                    ),
+                  ),
+                );
               },
-              child: Container(
-                padding: const EdgeInsets.all(5),
-                margin: const EdgeInsets.all(5),
-                decoration: const BoxDecoration(
-                  shape: BoxShape.circle,
-                  color: Colors.black45,
-                ),
-                child: const Icon(
-                  Iconsax.heart,
-                  color: AppColors.white,
-                  size: 18,
-                ),
-              ),
             ),
+
+            // 🔽 Infos da receita
             Container(
               padding: const EdgeInsets.all(10),
               width: width,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: AppColors.black,
+                color: AppColors.softBlack,
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -77,7 +89,7 @@ class RecipeCard extends StatelessWidget {
                   Text(
                     "${recipe.caloriesPerServing} Kcal",
                     style: const TextStyle(
-                      color: AppColors.darkGrey,
+                      color: AppColors.lightGrey,
                       fontSize: 12,
                     ),
                   ),
@@ -86,11 +98,11 @@ class RecipeCard extends StatelessWidget {
                     children: [
                       Text(
                         "⭐ ${recipe.rating}",
-                        style: const TextStyle(color: AppColors.darkGrey),
+                        style: const TextStyle(color: AppColors.lightGrey),
                       ),
                       Text(
                         "⏱️ ${recipe.prepTimeMinutes + recipe.cookTimeMinutes} min",
-                        style: const TextStyle(color: AppColors.darkGrey),
+                        style: const TextStyle(color: AppColors.lightGrey),
                       ),
                     ],
                   ),

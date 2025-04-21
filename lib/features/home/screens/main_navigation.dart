@@ -1,7 +1,9 @@
+import 'package:dam_project/features/favorites/screen/favorite_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:dam_project/features/home/screens/home_screen.dart';
 import 'package:dam_project/features/authentication/screen/profile_screen.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
+import 'package:iconsax/iconsax.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -16,7 +18,7 @@ class _MainNavigationState extends State<MainNavigation> {
 
   @override
   void initState() {
-    page = [HomeScreen(), const ProfileScreen()];
+    page = [HomeScreen(), FavoriteScreen(), const ProfileScreen()];
 
     super.initState();
   }
@@ -47,9 +49,18 @@ class _MainNavigationState extends State<MainNavigation> {
           });
         },
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
+            icon: Icon(_selectedIndex == 0 ? Iconsax.home5 : Iconsax.home_1),
+            label: "Home",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(_selectedIndex == 1 ? Iconsax.heart5 : Iconsax.heart),
+            label: "Favorite",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              _selectedIndex == 3 ? Iconsax.setting_21 : Iconsax.setting_2,
+            ),
             label: "Settings",
           ),
         ],

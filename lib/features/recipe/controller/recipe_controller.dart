@@ -86,4 +86,10 @@ class RecipeController extends ChangeNotifier {
           return matchesCategory && matchesSearch;
         }).toList();
   }
+
+  List<Recipe> getFavoriteRecipes(List<int> favoriteIds) {
+    return _allRecipes
+        .where((recipe) => favoriteIds.contains(recipe.id))
+        .toList();
+  }
 }
