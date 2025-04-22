@@ -1,3 +1,4 @@
+import 'package:dam_project/features/planner/screen/planner_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:dam_project/features/favorites/screen/favorite_screen.dart';
@@ -18,7 +19,12 @@ class _MainNavigationState extends State<MainNavigation> {
 
   @override
   void initState() {
-    page = [HomeScreen(), FavoriteScreen(), const ProfileScreen()];
+    page = [
+      HomeScreen(),
+      FavoriteScreen(),
+      PlannerScreen(),
+      const ProfileScreen(),
+    ];
 
     super.initState();
   }
@@ -56,6 +62,12 @@ class _MainNavigationState extends State<MainNavigation> {
           BottomNavigationBarItem(
             icon: Icon(_selectedIndex == 1 ? Iconsax.heart5 : Iconsax.heart),
             label: "Favorite",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(
+              _selectedIndex == 1 ? Iconsax.calendar5 : Iconsax.calendar,
+            ),
+            label: "Planner",
           ),
           BottomNavigationBarItem(
             icon: Icon(

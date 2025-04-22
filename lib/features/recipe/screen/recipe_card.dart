@@ -96,7 +96,7 @@ class RecipeCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "⭐ ${recipe.rating}",
+                        "⭐ ${recipe.rating.toStringAsFixed(2)}",
                         style: const TextStyle(color: AppColors.lightGrey),
                       ),
                       Text(

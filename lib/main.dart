@@ -8,6 +8,7 @@ import 'package:dam_project/common/controllers/input_controller.dart';
 import 'package:dam_project/features/recipe/services/recipe_service.dart';
 import 'package:dam_project/features/recipe/controller/recipe_controller.dart';
 import 'package:dam_project/features/favorites/controller/favorites_controller.dart';
+import 'package:dam_project/features/planner/controller/planner_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +27,7 @@ void main() async {
           create: (_) => RecipeController(RecipeService())..loadRecipes(),
         ),
         ChangeNotifierProvider(create: (_) => FavoritesController()),
+        ChangeNotifierProvider(create: (_) => PlannerController()),
       ],
       child: App(onboarding: onboarding),
     ),

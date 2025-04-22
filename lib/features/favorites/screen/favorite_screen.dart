@@ -39,12 +39,10 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
       backgroundColor: AppColors.white,
       appBar: AppBar(
         backgroundColor: AppColors.white,
+        centerTitle: true,
         title: const Text(
           "Favorites Recipes",
-          style: TextStyle(
-            fontWeight: FontWeight.bold,
-            color: AppColors.primary,
-          ),
+          style: TextStyle(fontWeight: FontWeight.bold, color: AppColors.black),
         ),
       ),
       body: FutureBuilder(
@@ -99,7 +97,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     width: double.infinity,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: Colors.white,
+                      color: AppColors.softGrey,
                     ),
                     child: Row(
                       children: [
@@ -107,7 +105,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                           width: 100,
                           height: 80,
                           decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: AppColors.white,
                             borderRadius: BorderRadius.circular(20),
                             image: DecorationImage(
                               fit: BoxFit.cover,
@@ -135,27 +133,27 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                   const Icon(
                                     Iconsax.flash_1,
                                     size: 16,
-                                    color: Colors.grey,
+                                    color: AppColors.darkerGrey,
                                   ),
                                   Text(
                                     "${favorite.caloriesPerServing} Cal",
                                     style: const TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.grey,
+                                      color: AppColors.darkerGrey,
                                     ),
                                   ),
                                   const Text(
                                     " . ",
                                     style: TextStyle(
                                       fontWeight: FontWeight.w900,
-                                      color: Colors.grey,
+                                      color: AppColors.darkerGrey,
                                     ),
                                   ),
                                   const Icon(
                                     Iconsax.clock,
                                     size: 16,
-                                    color: Colors.grey,
+                                    color: AppColors.darkerGrey,
                                   ),
                                   const SizedBox(width: 5),
                                   Text(
@@ -163,7 +161,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                     style: const TextStyle(
                                       fontSize: 12,
                                       fontWeight: FontWeight.bold,
-                                      color: Colors.grey,
+                                      color: AppColors.darkerGrey,
                                     ),
                                   ),
                                 ],
