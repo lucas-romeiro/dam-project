@@ -11,12 +11,8 @@ import 'package:dam_project/features/favorites/controller/favorites_controller.d
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // 1️⃣ Carrega Onboarding flag do SharedPreferences
   final prefs = await SharedPreferences.getInstance();
   final onboarding = prefs.getBool("onboarding") ?? false;
-
-  // 2️⃣ Cria e inicializa o AuthController antes do runApp
   final authController = AuthController();
   await authController.initStorage();
 
@@ -24,7 +20,6 @@ void main() async {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => OnBoardingController()),
-        // 3️⃣ Reutiliza a instância pré‑inicializada de AuthController
         ChangeNotifierProvider<AuthController>.value(value: authController),
         ChangeNotifierProvider(create: (_) => InputController()),
         ChangeNotifierProvider(

@@ -1,9 +1,9 @@
-import 'package:dam_project/features/favorites/screen/favorite_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:iconsax/iconsax.dart';
+import 'package:dam_project/features/favorites/screen/favorite_screen.dart';
 import 'package:dam_project/features/home/screens/home_screen.dart';
 import 'package:dam_project/features/authentication/screen/profile_screen.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
-import 'package:iconsax/iconsax.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});

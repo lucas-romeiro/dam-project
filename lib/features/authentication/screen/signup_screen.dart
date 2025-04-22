@@ -1,4 +1,3 @@
-import 'package:dam_project/common/controllers/input_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:dam_project/common/widgets/button.dart';
@@ -8,6 +7,7 @@ import 'package:dam_project/features/authentication/screen/widgets/calorie_slide
 import 'package:dam_project/features/authentication/controller/auth_controller.dart';
 import 'package:dam_project/features/authentication/screen/login_screen.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
+import 'package:dam_project/common/controllers/input_controller.dart';
 
 class SignupScreen extends StatelessWidget {
   const SignupScreen({super.key});

@@ -24,7 +24,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
 
     return Scaffold(
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: buildBottomButtons(context), // Alterado aqui
+      floatingActionButton: buildBottomButtons(context),
       backgroundColor: AppColors.white,
       body: SingleChildScrollView(
         child: Column(
@@ -206,7 +206,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
   /// Botões inferiores: Start Cooking + Favorite
   Widget buildBottomButtons(BuildContext context) {
     final favoritesController = Provider.of<FavoritesController>(context);
-    final recipe = widget.recipe; // Acessando corretamente `recipe` aqui
+    final recipe = widget.recipe;
     final isFavorite = favoritesController.isFavorite(recipe.id);
 
     return Padding(

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
 import 'package:dam_project/features/favorites/controller/favorites_controller.dart';
 import 'package:dam_project/features/recipe/model/recipe_model.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
-import 'package:provider/provider.dart';
 import 'package:dam_project/features/recipe/controller/recipe_controller.dart';
 
 class FavoriteScreen extends StatefulWidget {
@@ -127,8 +127,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                   fontSize: 16,
                                 ),
                                 maxLines: 1,
-                                overflow:
-                                    TextOverflow.ellipsis, // Evita overflow
+                                overflow: TextOverflow.ellipsis,
                               ),
                               const SizedBox(height: 5),
                               Row(

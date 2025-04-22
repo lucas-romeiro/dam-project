@@ -46,7 +46,7 @@ class RecipeController extends ChangeNotifier {
 
     try {
       _allRecipes = await _service.fetchRecipes();
-      _filterRecipes(); // Aplica filtro inicial
+      _filterRecipes();
     } catch (e) {
       _error = e.toString();
     }

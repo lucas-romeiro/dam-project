@@ -15,7 +15,6 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AuthController>(
       builder: (context, auth, _) {
-        // Aguarda até que o SharedPreferences seja lido
         if (!auth.isInitialized) {
           return const MaterialApp(
             home: Scaffold(body: Center(child: CircularProgressIndicator())),
