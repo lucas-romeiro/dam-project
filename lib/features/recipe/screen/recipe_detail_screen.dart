@@ -131,7 +131,7 @@ class _RecipeDetailScreenState extends State<RecipeDetailScreen> {
                       ),
                       const SizedBox(width: 10),
                       Text(
-                        "${recipe.rating}/5",
+                        "${recipe.rating.toStringAsFixed(2)}/5",
                         style: const TextStyle(fontSize: 14),
                       ),
                       const SizedBox(width: 5),
