@@ -10,7 +10,7 @@ Projeto de desenvolvimento de aplicativo móvel para avaliação de aprendizagem
 
 ### :dart: Descrição do Projeto
 
-O objetivo deste projeto é simplificar o planejamento de refeições e o preparo de comidas para indivíduos e famílias. Para isso, o aplicativo oferece receitas personalizadas, listas de compras organizadas e instruções de preparo fáceis de seguir. Ao reduzir a complexidade e o estresse associados ao planejamento e à cozinha, o app busca incentivar hábitos alimentares mais saudáveis e práticas culinárias mais acessíveis.
+O objetivo deste projeto é simplificar o planejamento de refeições e o preparo de comidas para indivíduos e famílias. Para isso, o aplicativo oferece receitas personalizadas e instruções de preparo fáceis de seguir. Ao reduzir a complexidade e o estresse associados ao planejamento e à cozinha, o app busca incentivar hábitos alimentares mais saudáveis e práticas culinárias mais acessíveis.
 
 #### :bookmark: Problema:
 
@@ -21,7 +21,6 @@ Muitas pessoas se sentem sobrecarregadas com as demandas do planejamento e prepa
 Um aplicativo intuitivo e direto que:
 
 - Fornece recomendações de refeições personalizadas;
-- Gera automaticamente listas de compras a partir do cardápio semanal;
 - Oferece instruções de preparo simples, com receitas que utilizam poucos ingredientes;
 - Inclui dicas e técnicas básicas de culinária para ajudar usuários iniciantes;
 - Auxilia no planejamento de refeições para períodos mais corridos, permitindo preparações antecipadas e práticas.
@@ -36,49 +35,38 @@ Um aplicativo intuitivo e direto que:
 
 ### :bookmark: Estórias do Usuário
 
+- **Onboarding de Introdução ao App**:
+  
+  Como usuário, desejo ser introduzido ao aplicativo e aprender sobre suas funcionalidades durante o meu primeiro acesso, para entender melhor como o aplicativo pode me ajudar a planejar minhas refeições.
+
 - **Cadastro e Login**:
 
   Como usuário, desejo me cadastrar e fazer login no aplicativo para acessar e personalizar meu planejamento de refeições.
 
 - **Configuração do Perfil**:
 
-  Como usuário, desejo configurar meu perfil com informações pessoais e preferências alimentares para receber sugestões que atendam às minhas necessidades.
-
+  Como usuário, desejo configurar meu perfil com informações pessoais, como o tipo de dieta e o target calórico, para receber sugestões de receitas e um planejamento de refeições que atendam às minhas necessidades.
+  
 - **Sugestão de Receitas Personalizadas**:
 
-  Como usuário, desejo receber sugestões de receitas baseadas no meu perfil e nas minhas necessidades, para diversificar meu cardápio sem complicações.
-
-- **Seguir Receitas Simples com Poucos Ingredientes**:
-
-  Como usuário, desejo encontrar receitas fáceis de seguir que utilizem poucos ingredientes, para que eu possa preparar refeições práticas mesmo com pouco tempo ou recursos.
-
-- **Criação e Edição do Cardápio Semanal**:
-
-  Como usuário, desejo criar e editar um cardápio semanal que organize minhas refeições de forma visual e prática.
+  Como usuário, desejo receber sugestões de receitas baseadas no meu perfil, preferências alimentares e necessidades nutricionais, para diversificar meu cardápio sem complicações.
 
 - **Gerenciar o Tempo e Reduzir o Estresse no Planejamento de Refeições**:
 
-  Como usuário, desejo planejar minhas refeições com antecedência, para gerenciar meu tempo de forma mais eficiente e reduzir o estresse relacionado à preparação das refeições.
+  Como usuário, desejo planejar minhas refeições com antecedência para gerenciar meu tempo de forma mais eficiente e reduzir o estresse relacionado à preparação das refeições.
 
-- **Lembrar dos Ingredientes para as Compras**:
+- **Favoritar e Gerenciar Receitas:**
+  
+  Como usuário, desejo poder favoritar minhas receitas preferidas, para acessá-las facilmente e poder excluí-las da minha lista de favoritas quando necessário.
 
-  Como usuário, frequentemente esqueço os ingredientes quando vou ao supermercado, então preciso de uma lista de compras gerada automaticamente a partir do meu cardápio para não faltar nada.
+- **Acessar o Planejamento de Refeições Diárias:**
+  
+  Como usuário, desejo acessar meu planejamento de refeições diário, que inclui informações nutricionais e receitas sugeridas com base nas minhas preferências alimentares, para me ajudar a seguir uma dieta personalizada.
 
-- **Notificações e Lembretes**:
-
-  Como usuário, desejo receber notificações e lembretes sobre o preparo das refeições e das compras, para manter minha rotina organizada.
-
-- **Aprender Técnicas Básicas de Culinária**:
-
-  Como usuário, desejo acessar uma seção com dicas e tutoriais de culinária, para aprender técnicas básicas e ganhar confiança na cozinha.
-
-- **Planejar Refeições para Períodos Agitados**:
-
-  Como usuário, preciso de funcionalidades que me ajudem a preparar refeições em lote ou que ofereçam opções rápidas, facilitando a organização durante períodos de alta demanda.
-
-- **Histórico de Planejamentos e Compartilhamento**:
-
-  Como usuário, desejo acessar o histórico dos meus cardápios e compartilhar os planejamentos com amigos e familiares para inspirá-los e receber feedback.
+- **Visualizar Informações da Conta e Perfil:**
+  
+  Como usuário, desejo acessar as informações do meu perfil, como meu nome, email, target calórico, dieta, para ter um controle completo das minhas preferências e dados no app.
+  
 
 ## :pushpin: Planejamento do Desenvolvimento
 
@@ -108,3 +96,10 @@ Gostaría de agradecer às seguintes pessoas e recursos que serviram de inspira�
   [Acessar UI Kit](https://www.figma.com/community/file/1370589699536863229/recipe-app-ui-kit-food-mobile-recipe-cooking-app)
 - **Ilya Kalinkin** – pelo design system e protótipo para plataforma de planejamento de refeições  
   [Acessar Design System](https://www.figma.com/community/file/987114242496003082/meal-planning-platform-design-system-and-prototype)
+  Storyset - Agradecemos pelas imagens PNG disponibilizadas, que ajudaram a enriquecer a experiência visual do aplicativo.
+- **Zaitoon Tech** - Agradecemos ao canal pelo conteúdo valioso que serviu como referência no desenvolvimento de várias funcionalidades.
+- **Coding with T** - Gratidão ao canal pelo material e dicas sobre melhores práticas de programação, que foram fundamentais para o sucesso do projeto.
+- **WTF Code** - Agradecemos pelo canal, que forneceu tutoriais úteis para resolver problemas técnicos complexos durante o desenvolvimento do aplicativo.
+- **Marcus Ng** - Obrigado ao canal, cujas explicações detalhadas sobre Flutter e Dart foram essenciais para a implementação das funcionalidades.
+
+
