@@ -1,8 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:dam_project/features/authentication/screen/auth_screen.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
 import 'package:dam_project/utils/device/device_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class OnBoardingButton extends StatelessWidget {
   const OnBoardingButton({super.key});

@@ -1,7 +1,9 @@
+import 'dart:convert';
+
 class User {
   final int? id;
   final String fullName;
-  final String email; // agora o email é único
+  final String email;
   final String password;
   final String? diet;
   final int? calories;
@@ -36,4 +38,10 @@ class User {
       calories: map['calories'],
     );
   }
+
+  /// Serialização para JSON
+  String toJson() => jsonEncode(toMap());
+
+  /// Desserialização de JSON
+  factory User.fromJson(String source) => User.fromMap(jsonDecode(source));
 }

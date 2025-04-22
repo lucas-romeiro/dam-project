@@ -1,6 +1,6 @@
+import 'package:flutter/material.dart';
 import 'package:dam_project/utils/constants/app_colors.dart';
 import 'package:dam_project/utils/device/device_utils.dart';
-import 'package:flutter/material.dart';
 
 class Button extends StatelessWidget {
   final String label;
